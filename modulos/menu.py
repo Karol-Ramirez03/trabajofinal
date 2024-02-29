@@ -1,6 +1,8 @@
 
 import os
 import sys
+import modulos.datos as md
+import modulos.personas as mp
 def borrar_pantalla():
     if sys.platform == "linux" or sys.platform == "darwin":
         os.system("clear")
@@ -56,7 +58,8 @@ def secondmenu():
     else:
 
         if (op == 1):
-            pass
+            mp.addpersonas()
+            return secondmenu()
         elif (op == 2):
             pass
         elif (op == 3):
@@ -65,6 +68,7 @@ def secondmenu():
             pass
         elif (op == 5):
             return crearmenu()
+        
 def menu_dos():
     borrar_pantalla()
     listopc=[1,2,3,4,5]
