@@ -1,8 +1,13 @@
 
 import os
 import sys
+from tabulate import tabulate
 import modulos.datos as md
 import modulos.personas as mp
+import modulos.zonas as mz
+import modulos.asignacion as ma
+
+
 def borrar_pantalla():
     if sys.platform == "linux" or sys.platform == "darwin":
         os.system("clear")
@@ -42,107 +47,149 @@ def crearmenu():
     else:
         return op
     
-def secondmenu():
+def secondmenu(activos,identificacion):
     borrar_pantalla()
+    titulo = [['MENU ACTIVOS']]
+    print(tabulate(titulo,tablefmt=('double_grid')))
     listopc=[1,2,3,4,5]
     try:
-        opciones = "1. AGREGAR\n2. EDITAR\n3. ELIMINAR\n4. BUSCA\n5. REGRESAR AL MENU PRINCIPAL"
+        opciones = "1. AGREGAR\n2. EDITAR\n3. ELIMINAR\n4. BUSCAR\n5. REGRESAR AL MENU PRINCIPAL"
         print (opciones)
         op = int(input('-'))
         if not(op in listopc):
-            secondmenu()
+            secondmenu(activos,identificacion)
     except ValueError:
         print('dato invalido') 
         pausar_pantalla()
-        secondmenu()  
+        secondmenu(activos,identificacion)  
     else:
 
         if (op == 1):
-            mp.addpersonas()
-            return secondmenu()
+            borrar_pantalla()
+            md.addactivo(activos,identificacion)
+            pausar_pantalla()
         elif (op == 2):
-            pass
+            borrar_pantalla()
+            md.editar_activo(activos,identificacion)
         elif (op == 3):
-            pass
+            borrar_pantalla()
+            md.eliminar_activo(activos, identificacion)
         elif (op == 4):
-            pass
+            borrar_pantalla()
+            md.mostrar_activo(activos, identificacion)
+            pausar_pantalla()
         elif (op == 5):
             return crearmenu()
         
-def menu_dos():
+def menu_dos(personas,identificacion):
     borrar_pantalla()
+    titulo = [['MENU PERSONAS']]
+    print(tabulate(titulo,tablefmt=('double_grid')))
     listopc=[1,2,3,4,5]
     try:
-        opciones = "1. AGREGAR\n2. EDITAR\n3. ELIMINAR\n4. BUSCA\n5. REGRESAR AL MENU PRINCIPAL"
+        opciones = "1. AGREGAR\n2. EDITAR\n3. ELIMINAR\n4. BUSCAR\n5. REGRESAR AL MENU PRINCIPAL"
         print (opciones)
         op = int(input('-'))
         if not(op in listopc):
-            menu_dos()
+            menu_dos(personas,identificacion)
     except ValueError:
         print('dato invalido') 
         pausar_pantalla()
-        menu_dos()  
+        menu_dos(personas,identificacion)  
     else:
 
         if (op == 1):
-            pass
+            borrar_pantalla()
+            mp.addpersonas(personas,identificacion)
+           
         elif (op == 2):
-            pass
+            borrar_pantalla()
+            mp.editar_persona(personas,identificacion)
+            
         elif (op == 3):
-            pass
+            borrar_pantalla()
+            mp.eliminar_persona(personas,identificacion)
+            
         elif (op == 4):
-            pass
+            borrar_pantalla()
+            mp.mostrar_persona(personas,identificacion)
+            pausar_pantalla()
+           
+
         elif (op == 5):
             return crearmenu()
-def menutres():
+        
+
+def menutres(zonas,identificacion):
     borrar_pantalla()
+    titulo = [['MENU ZONAS']]
+    print(tabulate(titulo,tablefmt=('double_grid')))
     listopc=[1,2,3,4,5]
     try:
-        opciones = "1. AGREGAR\n2. EDITAR\n3. ELIMINAR\n4. BUSCA\n5. REGRESAR AL MENU PRINCIPAL"
+        opciones = "1. AGREGAR\n2. EDITAR\n3. ELIMINAR\n4. BUSCAR\n5. REGRESAR AL MENU PRINCIPAL"
         print (opciones)
         op = int(input('-'))
         if not(op in listopc):
-            menutres()
+            menutres(zonas,identificacion)
     except ValueError:
         print('dato invalido') 
         pausar_pantalla()
-        menutres()  
+        menutres(zonas,identificacion)  
     else:
 
         if (op == 1):
-            pass
+            borrar_pantalla()
+            mz.addzonas(zonas,identificacion)
         elif (op == 2):
-            pass
+            borrar_pantalla()
+            mz.editar_zona(zonas, identificacion)
+            pausar_pantalla()
         elif (op == 3):
-            pass
+            borrar_pantalla()
+            mz.eliminar_zona(zonas, identificacion)
+            pausar_pantalla()
         elif (op == 4):
-            pass
+            borrar_pantalla()
+            mz.mostrar_zona(zonas,identificacion)
+            pausar_pantalla()
         elif (op == 5):
             return crearmenu()
+        
 
-def menuasignacion():
+
+
+def menuasignacion(json1,json2,json3,personas,activos,zonas,asignaciones):
     listopc=[1,2,3]
     borrar_pantalla()
+    titulo = [['MENU ASIGNACION']]
+    print(tabulate(titulo,tablefmt=('double_grid')))
     try:
         opciones = "1. CREAR ASIGNACION\n2. BUSCAR ASIGNACION\n3. REGRESAR AL MENU PRINCIPAL"
         print (opciones)
         op = int(input('-'))
         if not(op in listopc):
-            menuasignacion()
+            menuasignacion(json1,json2,json3,personas,activos,zonas,asignaciones)
     except ValueError:
         print('dato invalido') 
         pausar_pantalla()
-        menuasignacion()  
+        menuasignacion(json1,json2,json3,personas,activos,zonas,asignaciones)  
     else:
         if (op == 1):
-            pass 
+            ma.crear_asignacion(json1,json2,json3,personas,activos,zonas,asignaciones)
+            pausar_pantalla()
+            return menuasignacion(json1,json2,json3,personas,activos,zonas,asignaciones)
         elif (op == 2):
-            pass
+            ma.buscarasignaciones(asignaciones)
+            return menuasignacion(json1,json2,json3,personas,activos,zonas,asignaciones)
         elif (op == 3):
             return crearmenu()
         
+
+        
 def menureportes():
     borrar_pantalla()
+    titulo = [['MENU REPORTES']]
+    print(tabulate(titulo,tablefmt=('double_grid')))
     listopc=[1,2,3,4,5,6]
     try:
         opciones = "1. LISTAR TODOS LOS ACTIVOS\n2. LISTAR ACTIVOS POR CATEGORIA\n3. LISTAR ACTIVOS DADOS DE BAJA POR DAÑO\n4. LISTAR ACTIVOS Y ASIGNACION\n5. LISTAR HISTORIAL DE MOV. DE ACTIVO\n6. REGRESAR AL MENU PRINCIPAL"
@@ -156,20 +203,22 @@ def menureportes():
         menureportes()  
     else:
         if (op == 1):
-            pass 
+            return menureportes()
         elif (op == 2):
-            pass
+            return menureportes()
         elif (op == 3):
-            pass
+            return menureportes()
         elif (op == 4):
-            pass
+            return menureportes()
         elif (op == 5):
-            pass
+            return menureportes()
         elif (op == 6):
             return crearmenu()
         
 def menuactivos():
     borrar_pantalla()
+    titulo = [['MENU MOVIMIENTO ACTIVOS']]
+    print(tabulate(titulo,tablefmt=('double_grid')))
     listopc=[1,2,3,4,5,6]
     try:
         opciones = "1. RETORNO DE ACTIVO\n2. DAR DE BAJA ACTIVO\n3. CAMBIAR ASIGNACION DE ACTIVO\n4. ENVIAR A GARANTIA ACTIVO\n5. REGRESAR AL MENU PRINCIPAL"
@@ -183,13 +232,13 @@ def menuactivos():
         menuactivos()  
     else:
         if (op == 1):
-            pass 
+            return menuactivos() 
         elif (op == 2):
-            pass
+            return menuactivos()
         elif (op == 3):
-            pass
+            return menuactivos()
         elif (op == 4):
-            pass
+            return menuactivos()
         elif (op == 5):
             return crearmenu()
 

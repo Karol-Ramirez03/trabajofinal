@@ -1,0 +1,32 @@
+[
+    {
+        "num_identificacion": 3,
+        "nombre": "karol",
+        "email": "rgrthy",
+        "telefono": {
+            "movil": "",
+            "casa": "354556",
+            "personal": "",
+            "oficina": ""
+        },
+        "asignaciones": {
+            "4": {
+                "CodTransaccion": "366",
+                "NroFormulario": "366",
+                "codcampus": "cp00366",
+                "Marca": "COMPUMAX",
+                "Categoria": "EQUIPO DE COMPUTO",
+                "tipo": "mon",
+                "Valor Unitario": "11000",
+                "Proveedor": "Compumax Computer ",
+                "NroSerial": "102SN55102",
+                "EmpresaResponsable": "Campuslands",
+                "Estado": "0",
+                "Ubicacion": "Salon Artemis ",
+                "Nombre": "cp-Bodg50-9048-900-0044 GMRESC R3",
+                "codebar": "*00366*",
+                "": ""
+            }
+        }
+    }
+]
